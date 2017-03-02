@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - ticket service</title>
+    {% else %}
+    <title>Ticket Service</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Ticket Service: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>
