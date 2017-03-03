@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Hi, {{user.nickname}}!</h1>
 
 <p><b>Departure from:</b><br>
 <input type='text' list='departurefrom'>
     <datalist id='departurefrom'>
-    {% for city in citys %}
-       <option label={{city.city_name}} value={{city.city_id}}>
+    {% for city in city %}
+       <option label={{city.city_name}} value={{city.city_name}}>
     {% endfor %}
     </datalist>
 
 <p><b>Arrival to:</b><br>
 <input type='text' list='arrivalto'>
     <datalist id='arrivalto'>
-    {% for city in citys %}
-       <option label={{city.city_name}} value={{city.city_id}}>
+    {% for city in city %}
+       <option label={{city.city_name}} value={{city.city_name}}>
     {% endfor %}
     </datalist>
 
-{% for post in posts %}
-<p>
-  {{post.author.nickname}} says: <b>{{post.body}}</b>
-</p>
-{% endfor %}
+<p><b>First Name:</b><br>
+<input type='text' list='firstname'>
+
+<p><b>Last Name:</b><br>
+<input type='text' list='lastname'>
+
 {% endblock %}

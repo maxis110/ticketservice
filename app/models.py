@@ -3,7 +3,6 @@ from app import db
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(64), index=True, unique=True)
@@ -23,10 +22,9 @@ class Passenger(db.Model):
 class Flight(db.Model):
     flight_id = db.Column(db.Integer, primary_key=True)
     flight_code = db.Column(db.VARCHAR, unique=True)
-    flight_date = db.Column(db.DateTime)
-    flight_time = db.Column(db.DateTime)
+    departure_time = db.Column(db.DateTime)
+    arrival_time = db.Column(db.DateTime)
     aircraft_id = db.Column(db.Integer, db.ForeignKey('aircraft.aircr_id'))
-    duration = db.Column(db.Integer)
     city_arrival = db.Column(db.Integer, db.ForeignKey('city.city_id'))
     city_departure = db.Column(db.Integer, db.ForeignKey('city.city_id'))
 

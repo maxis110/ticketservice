@@ -2,28 +2,29 @@ from flask import render_template
 from flask import redirect
 from flask import url_for
 from flask import g
-from flask_login import current_user
 from app import app
 from models import City
+from models import Flight
 from forms import LoginForm
 
 @app.route('/')
 @app.route('/index')
 def index():
-    citys = City.query.all()
+    city = City.query.all()
+    return render_template('index.html', city=city)
 
-    user = { 'nickname': 'Miguel' }
-    posts = [
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home', user=user, posts=posts, citys=citys)
+
+@app.route('/flights')
+def flight():
+    flight = Flight.query.all()
+    duration = []
+    for elem in flight:
+        duration.append(elem.arrival_time - elem.departure_time)
+
+    print duration
+    print flight
+
+    return render_template('flight.html', flight=flight, duration=duration)
 
 
 @app.before_request

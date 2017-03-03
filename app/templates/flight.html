@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block flight %}
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+</style>
+</head>
+<h1>Flight information</h1>
+<body>
+<table style="width:100%">
+  <tr>
+    <th>Flight Code</th>
+    <th>Aircraft</th>
+    <th>Places</th>
+    <th>Departure</th>
+    <th>Time</th>
+    <th>Arrival</th>
+    <th>Time</th>
+    <th>Duration</th>
+  </tr>
+
+  <tr>
+      {% for flight in flight %}
+    <td>{{flight.flight_code}}</td>
+    <td>{{flight.aircraft_id}}</td>
+    <td></td>
+    <td>{{flight.city_departure}}</td>
+    <td>{{flight.departure_time.strftime('%d-%m-%Y - %H:%M:%S')}}</td>
+    <td>{{flight.city_arrival}}</td>
+    <td>{{flight.arrival_time.strftime('%d-%m-%Y - %H:%M:%S')}}</td>
+    <td>{{flight.arrival_time - flight.departure_time}}</td>
+  </tr>
+    {% endfor %}
+
+</body>
+{% endblock %}
