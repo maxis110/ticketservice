@@ -1,0 +1,2 @@
+class CheckFormResults():
+    pass

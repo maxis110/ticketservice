@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block checkflights %}
+
+<p><b>Departure from:</b><br>
+<form action="http://localhost:5000/check_results" method = "POST">
+<input type='text' list='departurefrom' name="departure">
+    <datalist id='departurefrom'>
+    {% for city in city %}
+       <option label={{city.city_name}} value={{city.city_id}}>
+    {% endfor %}
+    </datalist>
+
+<p><b>Arrival to:</b><br>
+<input type='text' list='arrivalto' name="arrival">
+    <datalist id='arrivalto'>
+    {% for city in city %}
+       <option label={{city.city_name}} value={{city.city_id}}>
+    {% endfor %}
+    </datalist>
+<p><input type = "submit" value = "submit" /></p>
+{% endblock %}
+

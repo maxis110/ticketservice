@@ -1,40 +1,30 @@
 from flask import render_template
-from flask import redirect
-from flask import url_for
-from flask import g
+from flask import request
 from app import app
 from models import City
 from models import Flight
-from forms import LoginForm
+
 
 @app.route('/')
 @app.route('/index')
 def index():
-    city = City.query.all()
-    return render_template('index.html', city=city)
+    return render_template('index.html')
 
 
 @app.route('/flights')
 def flight():
-    flight = Flight.query.all()
-    duration = []
-    for elem in flight:
-        duration.append(elem.arrival_time - elem.departure_time)
-
-    print duration
-    print flight
-
-    return render_template('flight.html', flight=flight, duration=duration)
+    return render_template('flight.html', flight=Flight.query.all())
 
 
-@app.before_request
-def before_request():
-    g.user = None
+@app.route('/check')
+def check_flights():
+    return render_template('check_flights.html', city=City.query.all())
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('index'))
-    form = LoginForm()
-    return render_template('login.html', title='Sign In', form=form)
+@app.route('/check_results', methods=['GET', 'POST'])
+def check_results():
+    if request.method == 'POST':
+        arrival = request.form.get('arrival')
+        departure = request.form.get('departure')
+    results = Flight.query.filter((Flight.city_arrival == arrival) and (Flight.city_departure == departure))
+    return render_template('check_results.html', results=results)
