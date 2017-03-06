@@ -1,26 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-
-<p><b>Departure from:</b><br>
-<input type='text' list='departurefrom'>
-    <datalist id='departurefrom'>
-    {% for city in city %}
-       <option label={{city.city_name}} value={{city.city_name}}>
-    {% endfor %}
-    </datalist>
-
-<p><b>Arrival to:</b><br>
-<input type='text' list='arrivalto'>
-    <datalist id='arrivalto'>
-    {% for city in city %}
-       <option label={{city.city_name}} value={{city.city_name}}>
-    {% endfor %}
-    </datalist>
-
+<form action="http://localhost:5000/order" method = "POST">
+<p><b>Flight number: </b><br>
+<textarea name="flightCode">{{ flightCode }}</textarea>
 <p><b>First Name:</b><br>
-<input type='text' list='firstname'>
+<input type='text' name='firstname'>
 
 <p><b>Last Name:</b><br>
-<input type='text' list='lastname'>
-<button type="button">Send</button>
+<input type='text' name='lastname'>
+
+<p><b>Class:</b><br>
+<input type='text' list='category' name="category">
+    <datalist id='category'>
+    {% for category in category %}
+       <option label={{category.categ_name}} value={{category.categ_name}}>
+    {% endfor %}
+    </datalist>
+
+<p><b>Number of persons:</b><br>
+<input type="number" step="1", min="0", max="10">
+
+<p><input type = "submit" value = "submit" /></p>
 {% endblock %}

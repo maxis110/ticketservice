@@ -18,6 +18,10 @@ class Passenger(db.Model):
     first_name = db.Column(db.String(64), index=True)
     last_name = db.Column(db.String(64), index=True)
 
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
 
 class Flight(db.Model):
     flight_id = db.Column(db.Integer, primary_key=True)
@@ -62,5 +66,9 @@ class Reservation(db.Model):
     reserv_id = db.Column(db.Integer, primary_key=True)
     passenger_id = db.Column(db.Integer, db.ForeignKey('passenger.pass_id'))
     reserv_flight = db.Column(db.Integer, db.ForeignKey('flight.flight_id'))
-    reserv_seat = db.Column(db.Integer)
-    reserv_row = db.Column(db.String(2))
+    reserv_class = db.Column(db.Integer, db.ForeignKey('category.categ_id'))
+
+    def __init__(self, passenger_id, reserv_flight, reserv_class):
+        self.passenger_id = passenger_id
+        self.reserv_flight = reserv_flight
+        self.reserv_class = reserv_class

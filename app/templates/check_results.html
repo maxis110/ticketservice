@@ -27,7 +27,7 @@ th, td {
 
   <tr>
       {% for flight in results %}
-    <td><a href="/index">{{flight.flight_code}}</a></td>
+    <td><a href="/index/{{flight.flight_code}}">{{flight.flight_code}}</a></td>
     <td>{{flight.aircraft_id}}</td>
     <td></td>
     <td>{{flight.city_departure}}</td>
