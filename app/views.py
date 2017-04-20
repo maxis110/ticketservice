@@ -3,7 +3,6 @@ from flask import request
 from app import app
 from app import db
 from models import City
-from models import Category
 from models import Passenger
 from models import Reservation
 from models import Flight
@@ -12,7 +11,7 @@ from models import Flight
 @app.route('/')
 @app.route('/index/<flightCode>')
 def index(flightCode):
-    return render_template('index.html', category=Category.query.all(), flightCode=flightCode)
+    return render_template('index.html', category=Reservation.query.all(), flightCode=flightCode)
 
 
 @app.route('/flights')

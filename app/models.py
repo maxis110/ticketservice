@@ -28,45 +28,21 @@ class Flight(db.Model):
     flight_code = db.Column(db.VARCHAR, unique=True)
     departure_time = db.Column(db.DateTime)
     arrival_time = db.Column(db.DateTime)
-    aircraft_id = db.Column(db.Integer, db.ForeignKey('aircraft.aircr_id'))
-    city_arrival = db.Column(db.Integer, db.ForeignKey('city.city_id'))
-    city_departure = db.Column(db.Integer, db.ForeignKey('city.city_id'))
-
-
-class Aircraft(db.Model):
-    aircr_id = db.Column(db.Integer, primary_key=True)
-    aircr_name = db.Column(db.String(64))
-    aircr_seat = db.Column(db.Integer)
-    aircr_comp = db.Column(db.Integer, db.ForeignKey('company.comp_id'))
-
-
-class Airport(db.Model):
-    airp_id = db.Column(db.Integer, primary_key=True)
-    airp_name = db.Column(db.String(64))
+    city_arrival = db.Column(db.String, db.ForeignKey('city.city_name'))
+    city_departure = db.Column(db.String, db.ForeignKey('city.city_name'))
 
 
 class City(db.Model):
-    city_id = db.Column(db.Integer, primary_key=True)
-    city_name = db.Column(db.String(64))
-
-
-class Company(db.Model):
-    comp_id = db.Column(db.Integer, primary_key=True)
-    comp_name = db.Column(db.String(64))
-    comp_desc = db.Column(db.String(256))
-
-
-class Category(db.Model):
-    categ_id = db.Column(db.Integer, primary_key=True)
-    categ_name = db.Column(db.String(64), unique=True)
-    categ_desc = db.Column(db.String(256))
+    city_name = db.Column(db.String(64), primary_key=True)
+    country = db.Column(db.String(64))
 
 
 class Reservation(db.Model):
     reserv_id = db.Column(db.Integer, primary_key=True)
     passenger_id = db.Column(db.Integer, db.ForeignKey('passenger.pass_id'))
     reserv_flight = db.Column(db.Integer, db.ForeignKey('flight.flight_id'))
-    reserv_class = db.Column(db.Integer, db.ForeignKey('category.categ_id'))
+    reserv_class = db.Column(db.String(64))
+    seat_number = db.Column(db.String(10))
 
     def __init__(self, passenger_id, reserv_flight, reserv_class):
         self.passenger_id = passenger_id
