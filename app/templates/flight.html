@@ -16,8 +16,6 @@ th, td {
 <table style="width:100%">
   <tr>
     <th>Flight Code</th>
-    <th>Aircraft</th>
-    <th>Places</th>
     <th>Departure</th>
     <th>Time</th>
     <th>Arrival</th>
@@ -27,9 +25,7 @@ th, td {
 
   <tr>
       {% for flight in flight %}
-    <td><a href="/index">{{flight.flight_code}}</a></td>
-    <td>{{flight.aircraft_id}}</td>
-    <td></td>
+    <td><a href="/index/{{flight.flight_code}}">{{flight.flight_code}}</a></td>
     <td>{{flight.city_departure}}</td>
     <td>{{flight.departure_time.strftime('%d-%m-%Y - %H:%M')}}</td>
     <td>{{flight.city_arrival}}</td>

@@ -4,17 +4,16 @@
 <p><b>Flight number: </b><br>
 <textarea name="flightCode">{{ flightCode }}</textarea>
 <p><b>First Name:</b><br>
-<input type='text' name='firstname'>
+<input type='text' name='first_name'>
 
 <p><b>Last Name:</b><br>
-<input type='text' name='lastname'>
+<input type='text' name='last_name'>
 
 <p><b>Class:</b><br>
 <input type='text' list='category' name="category">
     <datalist id='category'>
-    {% for category in category %}
-       <option label={{category.reserv_class}} value={{category.reserv_class}}>
-    {% endfor %}
+        <option value="Econom">
+        <option value="Business">
     </datalist>
 
 <p><b>Number of persons:</b><br>

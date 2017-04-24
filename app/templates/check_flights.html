@@ -6,7 +6,7 @@
 <input type='text' list='departurefrom' name="departure">
     <datalist id='departurefrom'>
     {% for city in city %}
-       <option label={{city.city_name}} value={{city.city_id}}>
+       <option label={{city.city_name}} value={{city.city_name}}>
     {% endfor %}
     </datalist>
 
@@ -14,7 +14,7 @@
 <input type='text' list='arrivalto' name="arrival">
     <datalist id='arrivalto'>
     {% for city in city %}
-       <option label={{city.city_name}} value={{city.city_id}}>
+       <option label={{city.city_name}} value={{city.city_name}}>
     {% endfor %}
     </datalist>
 <p><input type = "submit" value = "submit" /></p>

@@ -9,9 +9,12 @@ from models import Flight
 
 
 @app.route('/')
-@app.route('/index/<flightCode>')
-def index(flightCode):
-    return render_template('index.html', category=Reservation.query.all(), flightCode=flightCode)
+def base():
+    return render_template('base.html')
+
+@app.route('/index/<flight_code>')
+def index(flight_code):
+    return render_template('index.html', category=Reservation.query.all(), flightCode=flight_code)
 
 
 @app.route('/flights')
@@ -19,7 +22,7 @@ def flight():
     return render_template('flight.html', flight=Flight.query.all())
 
 
-@app.route('/check')
+@app.route('/flights_check')
 def check_flights():
     return render_template('check_flights.html', city=City.query.all())
 
@@ -36,23 +39,21 @@ def check_results():
 @app.route('/order', methods=['GET', 'POST'])
 def order():
     if request.method == 'POST':
-        firstname = request.form.get('firstname')
-        lastname = request.form.get('lastname')
-        passenger = Passenger(firstname, lastname)
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        passenger = Passenger(first_name, last_name)
         db.session.add(passenger)
         db.session.commit()
 
-        categoryName = request.form.get('category')
-        categoryFilter = Category.query.filter_by(categ_name=categoryName)
-        for category in categoryFilter:
-            category_id = category.categ_id
+        category_name = request.form.get('category')
+        flight_code = request.form.get('flightCode')
+        flight_filter = Flight.query.filter_by(flight_code=flight_code)
 
-        flightCode = request.form.get('flightCode')
-        flightFilter = Flight.query.filter_by(flight_code=flightCode)
-        for elem in flightFilter:
+        for elem in flight_filter:
             flight_id = elem.flight_id
-        reservation = Reservation(passenger.pass_id, flight_id, category_id)
+
+        reservation = Reservation(passenger.pass_id, flight_id, category_name)
         db.session.add(reservation)
         db.session.commit()
 
-    return render_template('reservation_accepted.html', category=categoryName, passenger=passenger, flight_id=flight_id)
+    return render_template('reservation_accepted.html', category=category_name, passenger=passenger, flight_code=flight_code)
